@@ -1,0 +1,39 @@
+import { defineConfig } from 'vite';
+import { VitePWA } from 'vite-plugin-pwa';
+
+export default defineConfig({
+  plugins: [
+    VitePWA({
+      registerType: 'autoUpdate',
+      devOptions: {
+        enabled: true,
+      },
+      workbox: {
+        globPatterns: ['**/*.{js,css,html,woff2,svg,png,webp}'],
+        navigateFallback: '/index.html',
+        cleanupOutdatedCaches: true,
+      },
+      manifest: {
+        name: 'PCI Lab — Offline Simulator',
+        short_name: 'PCI Lab',
+        description: 'Educational PCI simulator that works offline in any mobile browser',
+        start_url: '/',
+        display: 'standalone',
+        background_color: '#ffffff',
+        theme_color: '#0ea5e9',
+        icons: [
+          {
+            src: '/icon-192.png',
+            sizes: '192x192',
+            type: 'image/png',
+          },
+          {
+            src: '/icon-512.png',
+            sizes: '512x512',
+            type: 'image/png',
+          },
+        ],
+      },
+    }),
+  ],
+});
